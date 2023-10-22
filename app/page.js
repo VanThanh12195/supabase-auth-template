@@ -8,13 +8,15 @@ export const dynamic = "force-dynamic";
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
 
+  // const { data1, error1 } = await supabase.from('users').select('user_id, name')
+
+  const res = await supabase.from('todos').select()
+
+  console.log(res);
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const { data, error } = await supabase.auth.getSession();
-
-  console.log(data);
 
   return (
     <div className="w-full flex flex-col items-center">
