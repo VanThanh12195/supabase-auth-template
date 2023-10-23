@@ -3,12 +3,11 @@ import Messages from "./messages";
 import GitHubSigninButton from "../../components/GitHubSigninButton";
 
 export default function Login() {
-
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+    <div className=" flex flex-col w-full  sm:max-w-md justify-center gap-2 absolute left-8 top-8 py-2 px-4 ">
       <Link
         href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+        className="rounded-md no-underline bg-gray-300 hover:bg-gray-500 flex items-center group text-sm w-16 p-1 mb-5"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,13 +22,13 @@ export default function Login() {
           className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
         >
           <polyline points="15 18 9 12 15 6" />
-        </svg>{" "}
+        </svg>
         Back
       </Link>
 
-      <div className="flex flex-col w-full justify-center gap-2 text-foreground">
+      <div className="flex flex-col w-full justify-center gap-2">
         <form
-          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+          className="flex-1 flex flex-col w-full justify-center gap-2 "
           action="/auth/sign-in"
           method="post"
         >
@@ -63,7 +62,7 @@ export default function Login() {
           </button>
           <Messages />
         </form>
-        <GitHubSigninButton/>
+        <GitHubSigninButton />
       </div>
     </div>
   );

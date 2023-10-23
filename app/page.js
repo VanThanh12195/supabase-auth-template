@@ -3,40 +3,28 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import LogoutButton from "../components/LogoutButton";
 import { log } from "console";
+import { redirect } from "next/navigation";
+import IncrementButton from "../components/IncrementButton";
 
 export const dynamic = "force-dynamic";
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
 
-  // const { data1, error1 } = await supabase.from('users').select('user_id, name')
-
-  const res = await supabase.from('todos').select()
-
-  console.log(res);
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  if (!user) redirect("/login");
+
   return (
-    <div className="w-full flex flex-col items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
-          {user ? (
-            <div className="flex items-center gap-4">
-              Hey, {user.email}!
-              <LogoutButton />
-            </div>
-          ) : (
-            <Link
-              href="/login"
-              className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-            >
-              Login
-            </Link>
-          )}
+    <div className="w-full items-center m-7">
+        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm ">
+          <div className="flex flex-col items-center gap-4">
+            Hey, {user?.email}!
+            <LogoutButton />
+            <IncrementButton user={user}/>
+          </div>
         </div>
-      </nav>
     </div>
   );
 }
